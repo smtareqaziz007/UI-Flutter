@@ -8,6 +8,7 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<MyLogin> {
+  bool isHiddenPassword = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,17 +21,11 @@ class _MyLoginState extends State<MyLogin> {
         body: Stack(
           children: [
             Container(),
-            Container(
-              padding: EdgeInsets.only(left: 35, top: 130),
-              child: Text(
-                'Welcome\nBack',
-                style: TextStyle(color: Colors.white, fontSize: 33),
-              ),
-            ),
+
             SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.5),
+                    top: MediaQuery.of(context).size.height * 0.38),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,6 +38,7 @@ class _MyLoginState extends State<MyLogin> {
                             decoration: InputDecoration(
                                 fillColor: Colors.grey.shade100,
                                 filled: true,
+                                prefixIcon: Icon(Icons.email),
                                 hintText: "Email",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -53,11 +49,19 @@ class _MyLoginState extends State<MyLogin> {
                           ),
                           TextField(
                             style: TextStyle(),
-                            obscureText: true,
+                            obscureText: isHiddenPassword,
                             decoration: InputDecoration(
                                 fillColor: Colors.grey.shade100,
                                 filled: true,
                                 hintText: "Password",
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: InkWell(
+                                  onTap: _togglePasswordVisibility,
+                                  child: Icon(isHiddenPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off
+                                  ),
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
@@ -65,58 +69,107 @@ class _MyLoginState extends State<MyLogin> {
                           SizedBox(
                             height: 40,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    fontSize: 27, fontWeight: FontWeight.w700),
-                              ),
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Color(0xff4c505b),
-                                child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                    )),
-                              )
-                            ],
+
+                          TextButton(
+                            onPressed: () {
+                              //Navigator.pushNamed(context, 'home');
+                            },
+
+                            child: Text(
+                              'Sign In',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all(Colors.purple),
+                              backgroundColor: MaterialStateProperty.all(Colors.blue),
+                              minimumSize: MaterialStateProperty.all(Size(300 , 50))
+                            ),
                           ),
+
+
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       'Sign In',
+                          //       style: TextStyle(
+                          //           fontSize: 27, fontWeight: FontWeight.w700),
+                          //     ),
+                          //
+                          //     CircleAvatar(
+                          //       radius: 30,
+                          //       backgroundColor: Color(0xff4c505b),
+                          //       child: IconButton(
+                          //           color: Colors.white,
+                          //           onPressed: () {},
+                          //           icon: Icon(
+                          //             Icons.arrow_forward,
+                          //           )),
+                          //     )
+                          //   ],
+                          // ),
+
                           SizedBox(
-                            height: 40,
+                            height: 10,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, 'register');
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff4c505b),
-                                      fontSize: 18),
-                                ),
-                                style: ButtonStyle(),
-                              ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff4c505b),
-                                      fontSize: 18,
-                                    ),
-                                  )),
-                            ],
+
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, 'register');
+                            },
+                            child: Text(
+                              'Sign Up Here',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue,
+                                  fontSize: 20),
+                            ),
+                            style: ButtonStyle(),
+                          ),
+
+                          SizedBox(
+                            height: 30,
+                          ),
+
+                          Text(
+                            'Copyright 2022 \u00A9 All Rights Reserved',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16),
                           )
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     TextButton(
+                          //       onPressed: () {
+                          //         Navigator.pushNamed(context, 'register');
+                          //       },
+                          //       child: Text(
+                          //         'Sign Up',
+                          //         textAlign: TextAlign.center,
+                          //         style: TextStyle(
+                          //             decoration: TextDecoration.underline,
+                          //             color: Color(0xff4c505b),
+                          //             fontSize: 18),
+                          //       ),
+                          //       style: ButtonStyle(),
+                          //     ),
+                          //     // TextButton(
+                          //     //     onPressed: () {},
+                          //     //     child: Text(
+                          //     //       'Forgot Password',
+                          //     //       style: TextStyle(
+                          //     //         decoration: TextDecoration.underline,
+                          //     //         color: Color(0xff4c505b),
+                          //     //         fontSize: 18,
+                          //     //       ),
+                          //     //     )),
+                          //   ],
+                          // )
                         ],
                       ),
                     )
@@ -128,5 +181,10 @@ class _MyLoginState extends State<MyLogin> {
         ),
       ),
     );
+  }
+
+  void _togglePasswordVisibility(){
+    isHiddenPassword = !isHiddenPassword;
+    setState(() {});
   }
 }
